@@ -1,8 +1,6 @@
 # StateMachines::AfterTransitionCommit
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/state_machines/after_transition_commit`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Add `#after_transition_commit` to your active record state machines. This ensures that queueing up async jobs happens after the transaction is committed to the database.
 
 ## Installation
 
@@ -22,7 +20,22 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Anywhere you use `after_transition` you can replace with `after_transition_commit`
+
+```ruby
+state_machine :state, initial: :created do
+  state :created
+  state :complete
+
+  event(:finish) do
+    transition :created => :complete
+  end
+
+  after_transition_commit :created => :complete do |record|
+    YourAsyncJob.perform_later(record)
+  end
+end
+```
 
 ## Development
 
