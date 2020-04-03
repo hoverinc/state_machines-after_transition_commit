@@ -20,10 +20,14 @@ Or install it yourself as:
 
 ## Usage
 
-Anywhere you use `after_transition` you can replace with `after_transition_commit`
+Call `add_after_transition_commit_callback` inside your state machine to add the after transition commit callbacks.
+
+Anywhere you use `after_transition` you can replace with `after_transition_commit`:
 
 ```ruby
 state_machine :state, initial: :created do
+  add_after_transition_commit_callback
+
   state :created
   state :complete
 
