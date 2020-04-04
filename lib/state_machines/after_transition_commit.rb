@@ -1,4 +1,5 @@
 require "state_machines"
+require "state_machines-activerecord"
 require "state_machines/after_transition_commit/version"
 
 module StateMachines

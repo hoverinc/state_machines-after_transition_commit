@@ -20,7 +20,7 @@ RSpec.describe StateMachines::AfterTransitionCommit do
     cat.class.after_commit(&block)
 
     expect do
-      expect { cat.poke! && cat.save }.not_to(change { cat_name })
+      expect { cat.poke! }.not_to(change { cat_name })
     end.to change { cat.state.to_sym }.from(:asleep).to(:grumpy)
 
     expect(cat.name).to eq('Grumpy Cat')
