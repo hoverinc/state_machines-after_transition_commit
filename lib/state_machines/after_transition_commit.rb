@@ -16,9 +16,9 @@ module StateMachines
       end
     end
 
-    def after_transition_commit(**args, &after_transistion_block)
+    def after_transition_commit(*args, &after_transistion_block)
       state_machine = self
-      state_machine.after_transition(**args) do |object, _transition|
+      state_machine.after_transition(*args) do |object, _transition|
         blocks_to_call_after_commit = object.instance_variable_get(:@blocks_to_call_after_commit) || []
         blocks_to_call_after_commit << after_transistion_block
         object.instance_variable_set(:@blocks_to_call_after_commit, blocks_to_call_after_commit)
