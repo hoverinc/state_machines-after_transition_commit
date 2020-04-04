@@ -32,7 +32,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec", "~> 3.0"
   spec.add_development_dependency "activesupport", ">= 5.2", "< 7.0"
   spec.add_development_dependency "pg", ">= 1.1"
-  spec.add_development_dependency "database_cleaner"
 
   spec.add_runtime_dependency "activerecord", ">= 5.2", "< 7.0"
   spec.add_runtime_dependency "state_machines-activerecord", ">= 0.6.0", "< 1"

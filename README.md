@@ -41,6 +41,10 @@ state_machine :state, initial: :created do
 end
 ```
 
+### Gotchas
+
+Don't trigger saves in your `after_transition_commit` block or you'll end up in an infinite loop. The typical use case is for queueing async jobs.
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.

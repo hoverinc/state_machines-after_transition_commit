@@ -3,7 +3,6 @@ require "state_machines/after_transition_commit"
 require "factory_bot"
 require "ffaker"
 require "pry"
-require "database_cleaner"
 
 require_relative 'support/database.rb'
 require_relative 'support/schema.rb'
@@ -20,16 +19,5 @@ RSpec.configure do |config|
 
   config.expect_with :rspec do |c|
     c.syntax = :expect
-  end
-
-  config.before(:suite) do
-    DatabaseCleaner.strategy = :transaction
-    DatabaseCleaner.clean_with(:truncation)
-  end
-
-  config.around(:each) do |example|
-    DatabaseCleaner.cleaning do
-      example.run
-    end
   end
 end

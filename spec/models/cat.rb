@@ -3,22 +3,25 @@ class Cat < ApplicationRecord
   validates :state, presence: true
 
   state_machine :state, initial: :asleep do
-    state :asleep
+    add_after_transition_commit_callback
+
+    state :grumpy
     state :hungry
-    state :angry
-    state :bored
-    state :happy
 
-    event :poke! do
-      transition asleep: :angry
+    event :poke do
+      transition asleep: :grumpy
     end
 
-    event :pet! do
-      transition [:bored, :angry] => :asleep
+    event :pet do
+      transition grumpy: :hungry
     end
 
-    event :feed! do
+    event :feed do
       transition hungry: :asleep
+    end
+
+    after_transition_commit asleep: :grumpy do |cat|
+      cat.name = 'Grumpy Cat'
     end
   end
 end
